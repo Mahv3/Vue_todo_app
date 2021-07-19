@@ -17,6 +17,9 @@
             <button @click="addItem">
           Add
         </button>
+            <button @click="sortTodo">
+          sort
+        </button>
         </form>
         <ul>
             <li v-for="(todo,index) in todos">
@@ -28,12 +31,13 @@
             <option>未着手</option>
           </select>
                 <span :class="{done:todo.isDone}">{{todo.item}}</span>
+                <input type="text" v-model="todo.item" v-if="todo.rewrite" />
+                <button @click="rewriteTodo(index)">編集</button>
                 <button @click="deadLineSet(index)">期限</button>
                 <input type="date" v-if="todo.date" />
                 <button @click="deleteItem(index)">Delete</button>
             </li>
         </ul>
-        <pre>{{$data}}</pre>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script src="js/main.js"></script>

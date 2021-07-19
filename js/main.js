@@ -13,7 +13,9 @@ let app = new Vue({
                 isDone: false,
                 selected: "",
                 deadLine: "",
-                date: false
+                date: false,
+                rewrite: false,
+                sort: 0
             }
             this.todos.push(todo)
             this.newItem = ""
@@ -34,5 +36,23 @@ let app = new Vue({
         deadLineSet: function(index) {
             this.todos[index].date = true
         },
+        rewriteTodo: function(index) {
+            this.todos[index].rewrite = !this.todos[index].rewrite
+        },
+        sortTodo: function() {
+            this.todos.forEach(todo => {
+                if (todo.selected == "完了") {
+                    todo.sort = 1
+                } else if (todo.selected == "進行中") {
+                    todo.sort = 2
+                } else {
+                    todo.sort = 3
+                }
+            });
+
+            this.todos.sort(function(a, b) {
+                return a.sort - b.sort
+            })
+        }
     },
 })
